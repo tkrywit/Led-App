@@ -15,6 +15,27 @@ public class Project {
     private Bitmap photo;
     private ArrayList<Room> rooms;
 
+    public Project(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.photo = null;
+        this.rooms = new ArrayList<>();
+    }
+
+    public Project(String title, String description, Bitmap photo) {
+        this.title = title;
+        this.description = description;
+        this.photo = photo;
+        this.rooms = new ArrayList<>();
+    }
+
+    public Project(String title, String description, Bitmap photo, ArrayList<Room> rooms) {
+        this.title = title;
+        this.description = description;
+        this.photo = photo;
+        this.rooms = rooms;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="project_title">Sample Project Name</string>
     <string name="project_desc">A sample project description</string>
+    <string name="image_desc">An image of a lighting project</string>
+    <string name="bulb">Bulb</string>
+
 </resources>
