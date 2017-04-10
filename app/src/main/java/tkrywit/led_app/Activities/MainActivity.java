@@ -1,33 +1,50 @@
 package tkrywit.led_app.Activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-import tkrywit.led_app.Fragments.ProjectListFragment;
+import tkrywit.led_app.Adapters.ProjectListAdapter;
 import tkrywit.led_app.R;
+import tkrywit.led_app.Utilities.StateManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    ProjectListAdapter adapter;
+    StateManager stateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.project_list_fragment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Launch the project list fragment
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+        stateManager = StateManager.getInstance();
 
-        ProjectListFragment main = new ProjectListFragment();
-        ft.add(R.id.fragmentContainer, main, "projectListFrag");
+        RecyclerView list = (RecyclerView) findViewById(R.id.projRecycler);
+        list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new ProjectListAdapter();
+        list.setAdapter(adapter);
 
-        ft.commit();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mainFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Launch a new project fragment
+                Toast.makeText(MainActivity.this, "FAB", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, RoomActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package tkrywit.led_app.Adapters;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tkrywit.led_app.Model.Project;
+import tkrywit.led_app.Model.Room;
 import tkrywit.led_app.R;
 import tkrywit.led_app.Utilities.StateManager;
 
@@ -19,67 +21,46 @@ import tkrywit.led_app.Utilities.StateManager;
  * Created by tkryw on 4/6/2017.
  */
 
-public class ProjectListAdapter extends BaseAdapter {
+public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ProjectViewHolder>  {
 
-    private Context context;
     private StateManager stateManager;
-    private Fragment fragment;
 
-    public ProjectListAdapter(Context context, Fragment fragment) {
-        this.context = context;
-        this.fragment = fragment;
+    public class ProjectViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView roomName, desc;
+        public ImageView image;
+
+        public ProjectViewHolder(View view) {
+            super(view);
+            roomName = (TextView) view.findViewById(R.id.listProjTitle);
+            desc = (TextView) view.findViewById(R.id.listProjDesc);
+            image = (ImageView) view.findViewById(R.id.listProjImage);
+        }
+    }
+
+    public ProjectListAdapter() {
         this.stateManager = StateManager.getInstance();
     }
 
     @Override
-    public int getCount() {
-        return stateManager.getProjects().size();
+    public ProjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.project_list_item, parent, false);
+
+        return new ProjectViewHolder(itemView);
     }
 
     @Override
-    public Object getItem(int position) {
-        return stateManager.getProjects().get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get view for row item
-        LayoutInflater inflater = fragment.getActivity().getLayoutInflater();
-        final MyViewHolder holder;
-
-        //if view has not been inflated yet
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.project_list_item, parent, false);
-            holder = new MyViewHolder();
-            holder.photo =  (ImageView) convertView.findViewById(R.id.listProjImage);
-            holder.title = (TextView) convertView.findViewById(R.id.listProjTitle);
-            holder.desc = (TextView) convertView.findViewById(R.id.listProjDesc);
-
-            convertView.setTag(holder);
-
-        } else {
-            //return old viewholder
-            holder = (MyViewHolder) convertView.getTag();
-        }
-
-        //Bind data to views
-        holder.title.setText(stateManager.getProjects().get(position).getTitle());
+    public void onBindViewHolder(ProjectViewHolder holder, int position) {
+        holder.roomName.setText(stateManager.getProjects().get(position).getTitle());
         holder.desc.setText(stateManager.getProjects().get(position).getDescription());
-        if (stateManager.getProjects().get(position).getPhoto() != null) {
-            holder.photo.setImageBitmap(stateManager.getProjects().get(position).getPhoto());
-        }
-        return convertView;
+        holder.image.setImageBitmap(stateManager.getProjects().get(position).getPhoto());
+
     }
 
-    private static class MyViewHolder {
-        TextView title;
-        TextView desc;
-        ImageView photo;
+    @Override
+    public int getItemCount() {
+        return stateManager.getProjects().size();
     }
 
 }

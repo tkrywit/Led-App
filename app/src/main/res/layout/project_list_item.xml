@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
 
     <ImageView
         android:id="@+id/listProjImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:contentDescription="@string/image_desc"
-        android:padding="5dp"/>
+        android:padding="5dp" />
+
     <TextView
         android:id="@+id/listProjTitle"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:textSize="24sp"
-        android:text="@string/project_title"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/listProjImage" />
+        android:layout_toEndOf="@+id/listProjImage"
+        android:text="@string/project_title"
+        android:textSize="24sp" />
+
     <TextView
         android:id="@+id/listProjDesc"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="18sp"
-        android:layout_toEndOf="@+id/listProjImage"
         android:layout_below="@+id/listProjTitle"
-        android:text="@string/project_desc"/>
+        android:layout_toEndOf="@+id/listProjImage"
+        android:text="@string/project_desc"
+        android:textSize="18sp" />
 </RelativeLayout>
