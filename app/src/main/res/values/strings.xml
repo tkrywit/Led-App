@@ -5,5 +5,13 @@
     <string name="project_desc">A sample project description</string>
     <string name="image_desc">An image of a lighting project</string>
     <string name="bulb">Bulb</string>
+    <string name="new_project">Add New Project</string>
+    <string name="proj_name">Project Title</string>
+    <string name="proj_desc">Description</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

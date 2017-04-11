@@ -1,5 +1,7 @@
 package tkrywit.led_app.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,10 +15,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import tkrywit.led_app.Adapters.ProjectListAdapter;
+import tkrywit.led_app.Fragments.AddProjectDialogFrag;
 import tkrywit.led_app.R;
 import tkrywit.led_app.Utilities.StateManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddProjectDialogFrag.AddProjectListener{
 
     ProjectListAdapter adapter;
     StateManager stateManager;
@@ -40,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Launch a new project fragment
-                Toast.makeText(MainActivity.this, "FAB", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, RoomActivity.class);
-                startActivity(intent);
+                // close existing dialog fragments
+
+                AddProjectDialogFrag addDialogFrag = new AddProjectDialogFrag();
+                addDialogFrag.show(getSupportFragmentManager(), "AddFrag");
             }
         });
     }
@@ -67,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onAddProject(String name, String desc) {
+        stateManager.addProject(name, desc);
+        Intent intent = new Intent(this, RoomActivity.class);
+        startActivity(intent);
     }
 }
