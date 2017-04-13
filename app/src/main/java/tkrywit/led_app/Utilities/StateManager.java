@@ -17,7 +17,7 @@ public class StateManager {
     private StateManager() {
         projects = new ArrayList<>();
 
-        /*
+
         //Sample list for testing
         for (int i = 0; i < 10; i++) {
             Project project = new Project("Example Title " + String.valueOf(i), "Example desc");
@@ -27,7 +27,7 @@ public class StateManager {
             }
             projects.add(project);
         }
-        */
+
     }
 
     public static StateManager getInstance() {
@@ -37,8 +37,8 @@ public class StateManager {
         return instance;
     }
 
-    public void addProject(String name, String desc) {
-        Project newProj = new Project(name, desc);
+    public void addProject(String title, String desc) {
+        Project newProj = new Project(title, desc);
         projects.add(0, newProj);
     }
 

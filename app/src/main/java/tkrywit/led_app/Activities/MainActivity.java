@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import tkrywit.led_app.Adapters.ProjectListAdapter;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements AddProjectDialogF
         list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new ProjectListAdapter();
         list.setAdapter(adapter);
+
+        TextView noProjects = (TextView) findViewById(R.id.no_project_tv);
+        if (list.getAdapter().getItemCount() == 0) {
+            noProjects.setVisibility(View.VISIBLE);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mainFab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements AddProjectDialogF
         return super.onOptionsItemSelected(item);
     }
 
-    public void onAddProject(String name, String desc) {
-        stateManager.addProject(name, desc);
+    public void onAddProject(String title, String desc) {
+        stateManager.addProject(title, desc);
         Intent intent = new Intent(this, RoomActivity.class);
         startActivity(intent);
     }

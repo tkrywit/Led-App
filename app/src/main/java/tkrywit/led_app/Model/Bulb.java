@@ -4,12 +4,12 @@ package tkrywit.led_app.Model;
  * Created by tkryw on 4/6/2017.
  */
 
-public class Fixture {
+public class Bulb {
     private String type;
     private int watts;
     private int quantity;
 
-    public Fixture(String type, int watts, int number) {
+    public Bulb(String type, int watts, int number) {
         this.type = type;
         this.watts = watts;
         this.quantity = number;

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class Room {
     private String name;
     private String desc;
-    private ArrayList<Fixture> fixtures;
+    private ArrayList<Bulb> bulbs;
 
     public Room(String name, String desc) {
         this.name = name;
         this.desc = desc;
-        this.fixtures = new ArrayList<>();
+        this.bulbs = new ArrayList<>();
     }
 
     public String getName() {
@@ -33,12 +33,12 @@ public class Room {
         this.desc = desc;
     }
 
-    public ArrayList<Fixture> getFixtures() {
-        return fixtures;
+    public ArrayList<Bulb> getBulbs() {
+        return bulbs;
     }
 
-    public void setFixtures(ArrayList<Fixture> fixtures) {
-        this.fixtures = fixtures;
+    public void setBulbs(ArrayList<Bulb> bulbs) {
+        this.bulbs = bulbs;
     }
 
 }

@@ -1,29 +1,29 @@
 package tkrywit.led_app.Fragments;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import tkrywit.led_app.Adapters.AddBulbAdapter;
 import tkrywit.led_app.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AddProjectDialogFrag.AddProjectListener} interface
- * to handle interaction events.
+ * Created by tkryw on 4/13/2017.
  */
-public class AddProjectDialogFrag extends DialogFragment {
 
-    private AddProjectListener mListener;
+public class AddRoomFrag extends Fragment {
 
-    public AddProjectDialogFrag() {
+    private AddRoomListener mListener;
+
+    public AddRoomFrag() {
         // Required empty public constructor
     }
 
@@ -31,26 +31,17 @@ public class AddProjectDialogFrag extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_project_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_room_dialog, container, false);
 
-        final EditText title = (EditText) view.findViewById(R.id.titleEditText);
-        final EditText desc = (EditText) view.findViewById(R.id.descEditText);
-        Button accept = (Button) view.findViewById(R.id.projAcceptButton);
-        Button cancel = (Button) view.findViewById(R.id.projCancelButton);
+        EditText title = (EditText) view.findViewById(R.id.newRoomTitle);
+        EditText desc = (EditText) view.findViewById(R.id.newRoomDesc);
+        Button accept = (Button) view.findViewById(R.id.addRoomAccept);
+        Button cencal = (Button) view.findViewById(R.id.addRoomCancel);
+        RecyclerView recycler = (RecyclerView) view.findViewById(R.id.addRoomRecycler);
 
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onAddProject(title.getText().toString(), desc.getText().toString());
-                dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        AddBulbAdapter adapter = new AddBulbAdapter();
+        recycler.setAdapter(adapter);
 
         return view;
     }
@@ -64,8 +55,8 @@ public class AddProjectDialogFrag extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof AddProjectListener) {
-            mListener = (AddProjectListener) context;
+        if (context instanceof AddRoomListener) {
+            mListener = (AddRoomFrag.AddRoomListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -88,8 +79,8 @@ public class AddProjectDialogFrag extends DialogFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface AddProjectListener {
+    public interface AddRoomListener {
         // TODO: Update argument type and name
-        void onAddProject(String name, String desc);
+        void onAddRoom(String name, String desc);
     }
 }

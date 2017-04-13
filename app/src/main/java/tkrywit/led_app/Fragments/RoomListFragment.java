@@ -9,13 +9,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import tkrywit.led_app.Adapters.RoomListAdapter;
 import tkrywit.led_app.R;
@@ -26,7 +22,6 @@ import tkrywit.led_app.Utilities.StateManager;
  */
 public class RoomListFragment extends Fragment {
 
-    RoomListAdapter adapter;
     StateManager stateManager;
     int projectIndex = 0;
 
@@ -43,15 +38,22 @@ public class RoomListFragment extends Fragment {
         View view = inflater.inflate(R.layout.room_list_fragment, container, false);
         RecyclerView list = (RecyclerView) view.findViewById(R.id.roomRecyclerView);
         list.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        adapter = new RoomListAdapter(stateManager.getProjects().get(projectIndex).getRooms());
+        RoomListAdapter adapter = new RoomListAdapter(stateManager.getProjects().get(projectIndex).getRooms());
         list.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.roomListFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Launch a new project fragment
-                Toast.makeText(getActivity().getApplicationContext(), "FABulous", Toast.LENGTH_SHORT).show();
+                //This is probably not the best way to do this
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                AddRoomFrag roomDialogFrag = new AddRoomFrag();
+                ft.replace(R.id.roomContainer, roomDialogFrag, "projectFrag");
+
+                ft.commit();
             }
         });
 
@@ -61,5 +63,7 @@ public class RoomListFragment extends Fragment {
 
         return view;
     }
+
+
 
 }

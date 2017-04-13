@@ -10,6 +10,14 @@
     <string name="proj_desc">Description</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="add_room">Add Room</string>
+    <string name="room_title">Room Title</string>
+    <string name="room_desc">Room Description</string>
+    <string name="add">Add</string>
+    <string name="zero">0</string>
+    <string name="x">X</string>
+    <string name="no_projects">No projects yet!</string>
+    <string name="watts">Watt</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
